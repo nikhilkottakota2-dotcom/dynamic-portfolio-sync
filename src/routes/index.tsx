@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
   component: Portfolio,
   errorComponent: ({ error }) => (
     <Shell>
-      <div className="slab p-8">
+      <div className="glass p-8">
         <h1 className="text-3xl">Something broke</h1>
         <p className="mt-2 text-muted-foreground">{error.message}</p>
       </div>
@@ -44,14 +44,14 @@ function Shell({ children }: { children: React.ReactNode }) {
 function Marquee({ words }: { words: string[] }) {
   const line = words.length ? words : ["code", "build", "ship"];
   return (
-    <div className="overflow-hidden border-y-[3px] border-ink bg-primary py-3">
+    <div className="overflow-hidden border-y border-white/15 bg-white/5 py-3 backdrop-blur-xl">
       <div className="marquee-track flex w-max gap-8 whitespace-nowrap">
         {[0, 1].map((k) => (
           <div key={k} className="flex gap-8">
             {line.map((w) => (
               <span
                 key={`${k}-${w}`}
-                className="font-display text-lg uppercase tracking-tight text-primary-foreground"
+                className="font-display text-lg uppercase tracking-tight text-foreground/80"
               >
                 {w} ✦
               </span>
@@ -65,7 +65,7 @@ function Marquee({ words }: { words: string[] }) {
 
 function Stat({ label, value }: { label: string; value: number | string }) {
   return (
-    <div className="slab p-5">
+    <div className="glass p-5">
       <div className="font-display text-4xl">{value}</div>
       <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
         {label}
@@ -80,11 +80,11 @@ function RepoCard({ repo }: { repo: GitHubRepo }) {
       href={repo.html_url}
       target="_blank"
       rel="noreferrer noopener"
-      className="slab slab-hover flex flex-col p-6"
+      className="glass glass-hover flex flex-col p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl leading-tight break-words">{repo.name}</h3>
-        <span className="shrink-0 bg-highlight px-2 py-1 text-xs font-bold text-highlight-foreground">
+        <span className="shrink-0 rounded-full bg-highlight/90 px-3 py-1 text-xs font-bold text-highlight-foreground">
           ★ {repo.stargazers_count}
         </span>
       </div>
@@ -93,16 +93,16 @@ function RepoCard({ repo }: { repo: GitHubRepo }) {
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider">
         {repo.language && (
-          <span className="border-[3px] border-ink px-2 py-1">{repo.language}</span>
+          <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1">{repo.language}</span>
         )}
-        <span className="border-[3px] border-ink px-2 py-1">
+        <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1">
           {new Date(repo.updated_at).toLocaleDateString(undefined, {
             month: "short",
             year: "numeric",
           })}
         </span>
         {repo.homepage && (
-          <span className="bg-secondary px-2 py-1 text-secondary-foreground">live</span>
+          <span className="rounded-full bg-secondary/80 px-3 py-1 text-secondary-foreground">live</span>
         )}
       </div>
     </a>
@@ -134,7 +134,7 @@ function Content() {
   return (
     <>
       <Shell>
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-ink pb-5">
+        <header className="flex flex-wrap items-center justify-between gap-4 glass px-5 py-4">
           <span className="font-display text-lg">{displayName}</span>
           <nav className="flex gap-5 text-sm font-bold uppercase tracking-wider">
             <a href="#work" className="hover:text-primary">
@@ -156,7 +156,7 @@ function Content() {
 
         <section className="grid gap-8 pt-12 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
-            <p className="inline-block bg-highlight px-2 py-1 text-xs font-bold uppercase tracking-widest text-highlight-foreground">
+            <p className="inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-foreground backdrop-blur-md">
               Live from GitHub
             </p>
             <h1 className="mt-5 text-5xl leading-[0.95] md:text-7xl">
@@ -171,7 +171,7 @@ function Content() {
                 href={user.html_url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="slab-primary slab-hover px-5 py-3"
+                className="glass-primary glass-hover px-5 py-3"
               >
                 @{user.login}
               </a>
@@ -180,21 +180,21 @@ function Content() {
                   href={user.blog.startsWith("http") ? user.blog : `https://${user.blog}`}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="slab slab-hover px-5 py-3"
+                  className="glass glass-hover px-5 py-3"
                 >
                   Website
                 </a>
               )}
             </div>
           </div>
-          <div className="slab-primary p-3">
+          <div className="glass p-3">
             <img
               src={user.avatar_url}
               alt={`${displayName}'s GitHub avatar`}
               width={480}
               height={480}
               loading="lazy"
-              className="w-full border-[3px] border-ink"
+              className="w-full rounded-[calc(var(--radius)-0.35rem)]"
             />
           </div>
         </section>
@@ -223,7 +223,7 @@ function Content() {
               <RepoCard key={r.id} repo={r} />
             ))}
             {repos.length === 0 && (
-              <div className="slab p-6 text-muted-foreground">
+              <div className="glass p-6 text-muted-foreground">
                 No public repositories yet — they'll appear here automatically.
               </div>
             )}
@@ -236,7 +236,7 @@ function Content() {
             {languages.map(([lang, count]) => (
               <span
                 key={lang}
-                className="slab px-4 py-2 text-sm font-bold uppercase tracking-wider"
+                className="glass px-4 py-2 text-sm font-bold uppercase tracking-wider"
               >
                 {lang}
                 <span className="ml-2 text-muted-foreground">{count}</span>
@@ -250,7 +250,7 @@ function Content() {
           </div>
         </section>
 
-        <footer className="mt-16 border-t-[3px] border-ink pt-6 text-sm text-muted-foreground">
+        <footer className="mt-16 border-t border-white/15 pt-6 text-sm text-muted-foreground">
           Auto-synced with{" "}
           <a
             className="font-bold text-foreground underline"
@@ -272,7 +272,7 @@ function Portfolio() {
     <Suspense
       fallback={
         <Shell>
-          <div className="slab p-8 font-display text-xl">Loading GitHub…</div>
+          <div className="glass p-8 font-display text-xl">Loading GitHub…</div>
         </Shell>
       }
     >
