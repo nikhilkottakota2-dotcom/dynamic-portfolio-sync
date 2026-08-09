@@ -150,5 +150,44 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
 }
+
+@utility slab {
+  border: 3px solid var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  background: var(--color-background);
+}
+
+@utility slab-hover {
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--color-ink);
+  }
+}
+
+@utility marquee-track {
+  animation: marquee 26s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
