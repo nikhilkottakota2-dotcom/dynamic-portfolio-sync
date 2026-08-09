@@ -171,7 +171,7 @@ function Content() {
                 href={user.html_url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="slab slab-hover bg-primary px-5 py-3 text-primary-foreground"
+                className="slab-primary slab-hover px-5 py-3"
               >
                 @{user.login}
               </a>
@@ -187,7 +187,7 @@ function Content() {
               )}
             </div>
           </div>
-          <div className="slab bg-primary p-3">
+          <div className="slab-primary p-3">
             <img
               src={user.avatar_url}
               alt={`${displayName}'s GitHub avatar`}
