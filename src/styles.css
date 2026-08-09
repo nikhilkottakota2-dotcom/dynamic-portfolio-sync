@@ -191,3 +191,10 @@
   }
 }
 
+
+@utility slab-primary {
+  border: 3px solid var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
